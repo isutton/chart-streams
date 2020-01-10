@@ -32,7 +32,6 @@ func (g *GitChartProvider) initializeRepository() error {
 	var err error
 	g.gitRepo, err = repo.NewGitChartRepo(g.config)
 	return err
-
 }
 
 // buildIndexFile instantiate global index.

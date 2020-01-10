@@ -52,7 +52,7 @@ func (cb *billyChartBuilder) SetCommitTime(t time.Time) Builder {
 // gzip'ed tarball to be delivered to the caller. This method doesn't assume anything other than the
 // available filesystem.
 func (cb *billyChartBuilder) Build() (*Package, error) {
-	b := bytes.NewBuffer([]byte{})
+	b := bytes.NewBuffer(nil)
 	bw := bufio.NewWriter(b)
 	gzw := gzip.NewWriter(bw)
 	tw := tar.NewWriter(gzw)
@@ -75,7 +75,7 @@ func (cb *billyChartBuilder) Build() (*Package, error) {
 		return nil, err
 	}
 
-	p := &Package{bytesBuffer: b}
+	p := &Package{BytesBuffer: b}
 
 	return p, nil
 }
@@ -101,7 +101,12 @@ func appendFileToTarWriter(cb *billyChartBuilder, tw *tar.Writer) billyutil.Walk
 
 		// if the current path is a regular file, write its header and bytes to the tar writer
 		if fileInfo.Mode().IsRegular() {
-			b, err := ioutil.ReadFile(path)
+			f, err := fs.Open(path)
+			if err != nil {
+				return err
+			}
+
+			b, err := ioutil.ReadAll(f)
 			if err != nil {
 				return err
 			}

@@ -14,7 +14,7 @@ type WalkFn func(fs billy.Filesystem, path string, info os.FileInfo) error
 // Walk executes walkFn for each file in the path inside the given filesystem.
 func Walk(fs billy.Filesystem, path string, walkFn WalkFn) error {
 	info, err := fs.Lstat(path)
-	if err == nil {
+	if err != nil {
 		return err
 	}
 

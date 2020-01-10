@@ -17,7 +17,7 @@ require (
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 	gopkg.in/src-d/go-billy.v4 v4.3.2
 	gopkg.in/src-d/go-git.v4 v4.13.1
-	helm.sh/helm/v3 v3.0.1 // indirect
+	helm.sh/helm/v3 v3.0.1
 	k8s.io/apimachinery v0.0.0-20191014065749-fb3eea214746 // indirect
 	k8s.io/client-go v11.0.0+incompatible // indirect
 	k8s.io/helm v2.16.1+incompatible
